@@ -1,0 +1,47 @@
+package co.com.sofka.questions.usecases;
+
+import co.com.sofka.questions.collections.Question;
+import co.com.sofka.questions.repositories.QuestionRepository;
+import co.com.sofka.questions.utilties.MapperUtils;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import reactor.core.publisher.Flux;
+import reactor.test.StepVerifier;
+import static org.mockito.Mockito.*;
+
+class ListQuestionUseCaseTest {
+
+     QuestionRepository repository;
+     ListQuestionUseCase listQuestionUseCase;
+
+
+    @BeforeEach
+    public void setup(){
+        MapperUtils mapperUtils = new MapperUtils();
+        repository = mock(QuestionRepository.class);
+        listQuestionUseCase = new ListQuestionUseCase(mapperUtils, repository);
+    }
+
+    @Test
+     void getValidationTest(){
+        var question =  new Question();
+        question.setUserId("xxxx-xxxx");
+        question.setType("tech");
+        question.setCategory("software");
+        question.setQuestion("¿Que es java?");
+        when(repository.findAll()).thenReturn(Flux.just(question ));
+
+        StepVerifier.create(listQuestionUseCase.get())
+                .expectNextMatches(questionDTO -> {
+                    assert questionDTO.getUserId().equals("xxxx-xxxx");
+                    assert questionDTO.getCategory().equals("software");
+                    assert questionDTO.getQuestion().equals("¿Que es java?");
+                    assert questionDTO.getType().equals("tech");
+                    return true;
+                })
+                .verifyComplete();
+        verify(repository).findAll();
+
+    }
+}
