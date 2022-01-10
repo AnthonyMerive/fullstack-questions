@@ -5,20 +5,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Answer {
+
     @Id
     private String id;
     private String userId;
     private String questionId;
     private String answer;
-    private Integer position;
-
-    public Integer getPosition() {
-        return position;
-    }
-
-    public void setPosition(Integer position) {
-        this.position = position;
-    }
 
     public String getId() {
         return id;
@@ -51,4 +43,5 @@ public class Answer {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
 }
