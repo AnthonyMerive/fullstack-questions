@@ -150,7 +150,7 @@ export function postFavorite(favorite) {
         try {
             await fetch(`${URL_BASE}/favorite/add`,
                 {
-                    method: 'PUT',
+                    method: 'POST',
                     mode: 'cors',
                     headers: {
                         'Content-Type': 'application/json'
