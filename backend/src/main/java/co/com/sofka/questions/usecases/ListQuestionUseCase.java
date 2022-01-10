@@ -7,26 +7,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Service
 @Validated
-public class OwnerListUseCase implements Function<String, Flux<QuestionDTO>> {
-
+public class ListQuestionUseCase implements Supplier<Flux<QuestionDTO>> {
     private final QuestionRepository questionRepository;
     private final MapperUtils mapperUtils;
 
-    public OwnerListUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository) {
+    public ListQuestionUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
         this.mapperUtils = mapperUtils;
     }
 
-
     @Override
-    public Flux<QuestionDTO> apply(String userId) {
-        return questionRepository.findByUserId(userId)
+    public Flux<QuestionDTO> get() {
+        return questionRepository.findAll()
                 .map(mapperUtils.mapEntityToQuestion());
     }
-
 
 }
