@@ -2,10 +2,7 @@ package co.com.sofka.questions.model;
 
 
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class QuestionDTO {
     private String id;
@@ -17,26 +14,42 @@ public class QuestionDTO {
     private String type;
     @NotBlank
     private String category;
+    private String email;
     private List<AnswerDTO> answers;
-
+    private Map<String,String> answerVotes;
 
     public QuestionDTO() {
 
     }
 
-    public QuestionDTO(String userId, String question, String type, String category) {
+    public QuestionDTO(String userId,
+                       String question,
+                       String type,
+                       String category,
+                       String email,
+                       Map<String,String> answerVotes) {
         this.userId = userId;
         this.question = question;
         this.type = type;
         this.category = category;
+        this.email = email;
+        this.answerVotes = answerVotes;
     }
 
-    public QuestionDTO(String id, String userId, String question, String type, String category) {
+    public QuestionDTO(String id,
+                       String userId,
+                       String question,
+                       String type,
+                       String category,
+                       String email,
+                       Map<String,String> answerVotes) {
         this.id = id;
         this.userId = userId;
         this.question = question;
         this.type = type;
         this.category = category;
+        this.email = email;
+        this.answerVotes = answerVotes;
     }
 
     public List<AnswerDTO> getAnswers() {
@@ -88,6 +101,29 @@ public class QuestionDTO {
         this.category = category;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Map<String, String> getAnswerVotes() {
+        return answerVotes;
+    }
+
+//    public void setAnswerVotes(String idVoter, String idAnswer) {
+//        Map<String, String> votos = Optional.ofNullable(this.answerVotes).orElse(new HashMap<>());
+//        votos.put(idVoter,idAnswer);
+//        this.answerVotes = votos;
+//    }
+
+
+    public void setAnswerVotes(Map<String, String> answerVotes) {
+        this.answerVotes = answerVotes;
+    }
+
     @Override
     public String toString() {
         return "QuestionDTO{" +
@@ -96,6 +132,9 @@ public class QuestionDTO {
                 ", question='" + question + '\'' +
                 ", type='" + type + '\'' +
                 ", category='" + category + '\'' +
+                ", answers=" + answers +
+                ", answerVotes=" + answerVotes +
+                ", email='" + email + '\'' +
                 '}';
     }
 

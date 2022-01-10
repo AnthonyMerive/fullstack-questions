@@ -6,34 +6,35 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class AnswerDTO {
+    @NotBlank
+    private String questionId;
+    private String answerId;
     @NotBlank(message = "Debe existir el userId para este objeto")
     private String userId;
     @NotBlank
-    private String questionId;
-    @NotBlank
     private String answer;
-
-    private Integer position;
-
+    private Integer cantidadVotos;
 
     public AnswerDTO() {
-
     }
 
-    public AnswerDTO(@NotBlank String questionId, @NotBlank String userId, @NotBlank String answer) {
+    public AnswerDTO(@NotBlank String questionId,
+                     @NotBlank String userId,
+                     @NotBlank String answer,
+                     @NotBlank String answerId) {
         this.userId = userId;
         this.questionId = questionId;
         this.answer = answer;
+        this.answerId = answerId;
     }
 
-    public Integer getPosition() {
-        return Optional.ofNullable(position).orElse(1);
+    public Integer getCantidadVotos() {
+        return Optional.ofNullable(cantidadVotos).orElse(0);
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
+    public void setCantidadVotos(Integer cantidadVotos) {
+        this.cantidadVotos = cantidadVotos;
     }
-
 
     public String getUserId() {
         return userId;
@@ -59,6 +60,14 @@ public class AnswerDTO {
         this.answer = answer;
     }
 
+    public String getAnswerId() {
+        return answerId;
+    }
+
+    public void setAnswerId(String answerId) {
+        this.answerId = answerId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,9 +84,11 @@ public class AnswerDTO {
     @Override
     public String toString() {
         return "AnswerDTO{" +
-                "userId='" + userId + '\'' +
-                ", questionId='" + questionId + '\'' +
+                "questionId='" + questionId + '\'' +
+                ", answerId='" + answerId + '\'' +
+                ", userId='" + userId + '\'' +
                 ", answer='" + answer + '\'' +
+                ", cantidadVotos=" + cantidadVotos +
                 '}';
     }
 }
