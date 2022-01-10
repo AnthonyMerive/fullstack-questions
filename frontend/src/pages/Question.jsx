@@ -18,9 +18,9 @@ export const Question = () => {
 
     const handleVote = (aId) => {
         dispatch(vote({
-            questionId: id,
-            userId: uId,
-            answerId: aId
+            idQuestion: id,
+            idVoter: uId,
+            idAnswer: aId
         }))
     }
 
@@ -46,14 +46,14 @@ export const Question = () => {
                 question?.answers?.length > 0 ?
                     <ul className="list-group mb-5">
                         {question?.answers?.sort((a, b) => b.cantidadVotos - a.cantidadVotos).map(data =>
-                            <li key={data?.id}
+                            <li key={data?.answerId}
                                 className="list-group-item d-flex justify-content-between align-items-center mt-2"
                             >
                                 {data?.answer}
                                 <div className='d-flex'>
                                     {uId &&
-                                    (question.answerVotes[uId] !== data?.id)&&
-                                        <button onClick={() => handleVote(data?.id)} className="badge bg-danger rounded-pill me-2">Like</button>
+                                    (question.answerVotes[uId] !== data?.answerId)&&
+                                        <button onClick={() => handleVote(data?.answerId)} className="badge bg-danger rounded-pill me-2">Like</button>
                                     }
                                     <h6 className=''>votes: {data?.cantidadVotos}</h6>
                                 </div>
