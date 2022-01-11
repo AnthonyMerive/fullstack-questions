@@ -32,7 +32,7 @@ public class AddFavoriteUseCase implements SaveFavorite {
         return favoriteRepository.findByUserId(favoriteDTO.getUserId())
                 .switchIfEmpty(Mono.just(mapperUtils.mapperFavoriteDTOToEntity().apply(favoriteDTO)))
                 .flatMap(favorite -> {
-                    if(favorite.getFavoriteQuestionsId() == null){
+                    if (favorite.getFavoriteQuestionsId() == null) {
                         List<String> favoriteQuestionsId = new ArrayList<>();
                         favorite.setFavoriteQuestionsId(favoriteQuestionsId);
                     }
@@ -42,6 +42,7 @@ public class AddFavoriteUseCase implements SaveFavorite {
                     ));
                 });
     }
+
 }
 
 

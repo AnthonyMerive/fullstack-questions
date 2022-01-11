@@ -8,7 +8,6 @@ import co.com.sofka.questions.routers.EmailSenderService;
 import co.com.sofka.questions.usecases.interfaces.SaveAnswer;
 import co.com.sofka.questions.utilties.MapperUtils;
 import co.com.sofka.questions.utilties.VotacionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
@@ -19,8 +18,7 @@ import java.util.Objects;
 @Validated
 public class AddAnswerUseCase implements SaveAnswer {
 
-    @Autowired
-    private EmailSenderService emailSenderService;
+    private final EmailSenderService emailSenderService;
     private final AnswerRepository answerRepository;
     private final QuestionRepository questionRepository;
     private final MapperUtils mapperUtils;
@@ -30,12 +28,13 @@ public class AddAnswerUseCase implements SaveAnswer {
     public AddAnswerUseCase(MapperUtils mapperUtils,
                             GetUseCase getUseCase,
                             AnswerRepository answerRepository,
-                            QuestionRepository questionRepository) {
-
+                            QuestionRepository questionRepository,
+                            EmailSenderService emailSenderService) {
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
         this.getUseCase = getUseCase;
         this.mapperUtils = mapperUtils;
+        this.emailSenderService = emailSenderService;
     }
 
     public Mono<QuestionDTO> apply(AnswerDTO answerDTO) {
@@ -57,7 +56,7 @@ public class AddAnswerUseCase implements SaveAnswer {
     }
 
     private void sendEmail(QuestionDTO questionDTO) {
-        emailSenderService.sendSimpleEmail(
+        emailSenderService. sendSimpleEmail(
                 questionDTO.getEmail(),
                 "Se ha añadido una nueva respuesta a la pregunta - ".concat(questionDTO.getQuestion()),
                 "Nueva respuesta");

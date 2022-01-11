@@ -19,10 +19,6 @@ public class Question {
     private String email;
     private Map<String, String> answersVotes;
 
-/*
-    private Boolean tieneRespuesta; //Propuesta para trabajar el punto5
-    */
-
     public Question() {
         this.answersVotes = new HashMap<>();
     }
