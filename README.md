@@ -1,6 +1,6 @@
-# PokeAPP:
+# Q&A APP:
 
-![Despliegue](https://res.cloudinary.com/df8qzqymf/image/upload/v1641861036/homepage_bs4ob9.png)
+![Despliegue](https://res.cloudinary.com/df8qzqymf/image/upload/v1641861231/homepage_swplkn.png)
 
 ## Descripcion:
 
