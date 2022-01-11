@@ -20,8 +20,8 @@ Se realizo una aplicacion de preguntas y respuestas, basandonos en dos tipos de 
 ### Perspectiva Back-end
 
 El backend se centro en realizar una API-Rest reactiva usando Spring-boot webflux, ademas usando como Base de 
-datos NoSQL MongoDB, desde el back se realizan las validaciones para y el envio de correos cuando una pregunta es
-contestada, se desplego esta API en Heroku.
+datos NoSQL MongoDB, desde el back se realizan las validaciones, reglas de negocio para el sistema de votacion
+y el envio de correos cuando una pregunta es contestada, se desplego esta API en Heroku.
 
 ### Perspectiva Front-end
 
